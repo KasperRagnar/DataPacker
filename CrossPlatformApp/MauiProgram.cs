@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BusinessLogic;
+using Microsoft.Extensions.Logging;
 
 namespace CrossPlatformApp
 {
@@ -9,6 +10,7 @@ namespace CrossPlatformApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .RegisterServices()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -20,6 +22,15 @@ namespace CrossPlatformApp
 #endif
 
             return builder.Build();
+        }
+
+        public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
+        {
+            mauiAppBuilder.Services.AddSingleton<IAdbService, AdbService>();
+
+            // More services registered here.
+
+            return mauiAppBuilder;
         }
     }
 }
