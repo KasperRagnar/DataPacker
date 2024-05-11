@@ -13,19 +13,23 @@ namespace BusinessLogic
             process = new Process();
         }
 
-        public void StartAdbServerBackgroundProcess()
+        public void StartAdbApplicationAsBackgroundProcess()
         {
             if (processHasStarted)
             {
                 throw new InvalidOperationException("Server is already started");
             }
-            
-            Debug.WriteLine("Hello world");
-            process.StartInfo.FileName = "adb.exe";
+
+
+            //Debug.WriteLine("Hello world");
             string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
+
+            process.StartInfo.FileName = "adb.exe";
             process.StartInfo.WorkingDirectory = adbPath;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.Arguments = "adb start-server";
+
             process.OutputDataReceived += OnOutputReceivedHandler;
             process.Start();
 
@@ -34,7 +38,7 @@ namespace BusinessLogic
 
         public void OnOutputReceivedHandler(object source, DataReceivedEventArgs e)
         {
-            // Insert logic here
+            // Do we need to react to any kind of output?
         }
 
         void IDisposable.Dispose()
@@ -49,6 +53,7 @@ namespace BusinessLogic
             {
                 if (!process.HasExited)
                 {
+                    process.StandardInput.WriteLine("adb kill-server");
                     process.Dispose();
                 }
             }

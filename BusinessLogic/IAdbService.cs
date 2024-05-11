@@ -2,6 +2,6 @@
 {
     public interface IAdbService
     {
-        void StartAdbServerBackgroundProcess();
+        void StartAdbApplicationAsBackgroundProcess();
     }
 }
