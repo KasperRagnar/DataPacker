@@ -24,6 +24,9 @@ namespace BusinessLogic
             //Debug.WriteLine("Hello world");
             string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
 
+            // TODO: Check if Directory.GetCurrentDirectory() will get current directory of application exe file
+            //Directory.GetCurrentDirectory()
+
             process.StartInfo.FileName = "adb.exe";
             process.StartInfo.WorkingDirectory = adbPath;
             process.StartInfo.CreateNoWindow = true;
@@ -38,6 +41,7 @@ namespace BusinessLogic
 
         public void OnOutputReceivedHandler(object source, DataReceivedEventArgs e)
         {
+            Debug.WriteLine(e.Data);
             // Do we need to react to any kind of output?
         }
 
