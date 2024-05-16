@@ -21,20 +21,24 @@ namespace BusinessLogic
             }
 
 
-            //Debug.WriteLine("Hello world");
             string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
 
-            // TODO: Check if Directory.GetCurrentDirectory() will get current directory of application exe file
-            //Directory.GetCurrentDirectory()
+            try
+            { // TODO: figure out how to handle be allowed to execute adb.exe file
+                process.StartInfo.FileName = "adb.exe"; // TODO: Change adb.exe to use cmd (or akin) to make this a waiting process instead of fire and forget
+                process.StartInfo.WorkingDirectory = adbPath;
+                process.StartInfo.CreateNoWindow = false;
+                process.StartInfo.UseShellExecute = true; // TODO: Figure out why "true" this prervents start from throwing exception as if it was not allowed to execute the file
+                process.StartInfo.Arguments = "adb devices";
 
-            process.StartInfo.FileName = "adb.exe";
-            process.StartInfo.WorkingDirectory = adbPath;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.Arguments = "adb start-server";
-
-            process.OutputDataReceived += OnOutputReceivedHandler;
-            process.Start();
+                process.OutputDataReceived += OnOutputReceivedHandler;
+                process.Start();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"{nameof(Exception)}: {e.Message}");
+                throw;
+            }
 
             processHasStarted = true;
         }
