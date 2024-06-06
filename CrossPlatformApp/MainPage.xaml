@@ -35,6 +35,18 @@
                 x:Name="ConnectBtnTest"
                 Text="Click me" 
                 HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="HelloWorldBtn"
+                Text="Click me for input" 
+                Clicked="OnWriteInputClicked"
+                HorizontalOptions="Fill" />
+            <Frame 
+                BorderColor="Gray"
+                CornerRadius="10">
+                <Label 
+                    x:Name="OutputLabel" />
+            </Frame>
         </VerticalStackLayout>
     </ScrollView>
 
