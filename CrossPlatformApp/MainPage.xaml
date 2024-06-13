@@ -33,19 +33,35 @@
 
             <Button
                 x:Name="ConnectBtnTest"
-                Text="Click me" 
+                Text="Connect to CMD" 
+                Clicked="OnConnectBtnClicked"
                 HorizontalOptions="Fill" />
-
             <Button
                 x:Name="HelloWorldBtn"
-                Text="Click me for input" 
+                Text="Click me to write input" 
                 Clicked="OnWriteInputClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="AdbStartServerBtn"
+                Text="Click me to start adb server" 
+                Clicked="OnStartServerClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="AdbKillServerBtn"
+                Text="Click me to kill adb server" 
+                Clicked="OnKillServerClicked"
                 HorizontalOptions="Fill" />
             <Frame 
                 BorderColor="Gray"
                 CornerRadius="10">
                 <Label 
                     x:Name="OutputLabel" />
+            </Frame>
+            <Frame 
+                BorderColor="Gray"
+                CornerRadius="10">
+                <Label 
+                    x:Name="ErrorLabel" />
             </Frame>
         </VerticalStackLayout>
     </ScrollView>

@@ -9,5 +9,7 @@ namespace BusinessLogic
         void WriteInput(string input);
 
         void AttachHandlerToProcessOutputEvents(DataReceivedEventHandler handler);
+
+        void AttachHandlerToProcessErrorEvents(DataReceivedEventHandler handler);
     }
 }

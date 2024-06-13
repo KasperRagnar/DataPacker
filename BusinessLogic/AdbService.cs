@@ -23,7 +23,7 @@ namespace BusinessLogic
             }
 
 
-            //string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
+            string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
 
             try
             { // TODO: figure out how to handle be allowed to execute adb.exe file
@@ -31,8 +31,8 @@ namespace BusinessLogic
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.FileName = "cmd.exe"; // TODO: Change adb.exe to use cmd (or akin) to make this a waiting process instead of fire and forget
-                //process.StartInfo.WorkingDirectory = adbPath;
-                process.StartInfo.CreateNoWindow = false;
+                process.StartInfo.WorkingDirectory = adbPath;
+                process.StartInfo.CreateNoWindow = true;
                 //process.StartInfo.UseShellExecute = true; // TODO: Figure out why "true" this prervents start from throwing exception as if it was not allowed to execute the file
                 process.StartInfo.UseShellExecute = false;
 
@@ -58,6 +58,11 @@ namespace BusinessLogic
         public void AttachHandlerToProcessOutputEvents(DataReceivedEventHandler handler)
         {
             process.OutputDataReceived += handler;
+        }
+
+        public void AttachHandlerToProcessErrorEvents(DataReceivedEventHandler handler)
+        {
+            process.ErrorDataReceived += handler;
         }
 
         public void OnOutputReceivedHandler(object source, DataReceivedEventArgs e)

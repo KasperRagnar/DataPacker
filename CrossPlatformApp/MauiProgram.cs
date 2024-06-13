@@ -27,7 +27,8 @@ namespace CrossPlatformApp
         public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddSingleton<IAdbService, AdbService>();
-
+            mauiAppBuilder.Services.AddSingleton<MainPage>();
+            mauiAppBuilder.Services.AddSingleton<IServiceProvider, ServiceProvider>();
             // More services registered here.
 
             return mauiAppBuilder;
