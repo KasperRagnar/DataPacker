@@ -30,7 +30,8 @@ namespace BusinessLogic
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.FileName = "cmd.exe"; // TODO: Change adb.exe to use cmd (or akin) to make this a waiting process instead of fire and forget
+                //process.StartInfo.FileName = "cmd.exe"; // TODO: Change adb.exe to use cmd (or akin) to make this a waiting process instead of fire and forget
+                process.StartInfo.FileName = "powershell.exe"; // TODO: Change adb.exe to use cmd (or akin) to make this a waiting process instead of fire and forget
                 process.StartInfo.WorkingDirectory = adbPath;
                 process.StartInfo.CreateNoWindow = true;
                 //process.StartInfo.UseShellExecute = true; // TODO: Figure out why "true" this prervents start from throwing exception as if it was not allowed to execute the file

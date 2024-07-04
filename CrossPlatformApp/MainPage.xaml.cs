@@ -6,7 +6,6 @@ namespace CrossPlatformApp
     public partial class MainPage : ContentPage
     {
         string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
-        private string unneededSubString = "C:\\WINDOWS\\system32>";
         private string currentCommand = string.Empty;
 
         int count = 0;
@@ -43,8 +42,9 @@ namespace CrossPlatformApp
 
         private void OnWriteInputClicked(object sender, EventArgs e)
         {
-            //string nextCmdCommand = "echo hello world";
-            string nextCmdCommand = "adb.exe devices";
+            //string nextCmdCommand = "echo hello world \r\n hello world";
+            string nextCmdCommand = "echo hello world";
+            //string nextCmdCommand = "adb.exe devices";
             currentCommand = nextCmdCommand;
             _adbService.WriteInput(currentCommand);
         }
@@ -65,25 +65,47 @@ namespace CrossPlatformApp
             _adbService.WriteInput(currentCommand);
         }
 
+        //private void OnOutputReceived(object sender, DataReceivedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(e.Data))
+        //    {
+        //        string input = adbPath + ">" +  currentCommand;
+        //        if (e.Data == input)
+        //        {
+        //            return;
+        //        }
+        //        if (e.Data != currentCommand)
+        //        {
+        //            MainThread.BeginInvokeOnMainThread(() =>
+        //            {
+        //                OutputLabel.Text += e.Data;
+        //                SemanticScreenReader.Announce(OutputLabel.Text);
+        //            });
+        //        }
+        //    }
+        //}
+
         private void OnOutputReceived(object sender, DataReceivedEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Data))
             {
-                string input = adbPath + ">" +  currentCommand;
-                if (e.Data == input)
+                string input = "PS " + adbPath + ">";
+                string finalOutput = e.Data;
+
+                if (e.Data.Contains(input))
                 {
-                    return;
+                    finalOutput = e.Data.Remove(0, input.Length);
                 }
-                if (e.Data != currentCommand)
+
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    MainThread.BeginInvokeOnMainThread(() =>
-                    {
-                        OutputLabel.Text += e.Data;
-                        SemanticScreenReader.Announce(OutputLabel.Text);
-                    });
-                }
+                    OutputLabel.Text += finalOutput;
+                    //OutputLabel.Text += finalOutput + "\r\n";
+                    SemanticScreenReader.Announce(OutputLabel.Text);
+                });
             }
         }
+
         private void OnErrorReceived(object sender, DataReceivedEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Data))
