@@ -43,10 +43,17 @@ namespace CrossPlatformApp
         private void OnWriteInputClicked(object sender, EventArgs e)
         {
             //string nextCmdCommand = "echo hello world \r\n hello world";
-            string nextCmdCommand = "echo hello world";
+            string nextCmdCommand = "hello world";
             //string nextCmdCommand = "adb.exe devices";
             currentCommand = nextCmdCommand;
-            _adbService.WriteInput(currentCommand);
+            string finalOutput = _adbService.WriteInput(currentCommand);
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                OutputLabel.Text += finalOutput;
+                //OutputLabel.Text += finalOutput + "\r\n";
+                SemanticScreenReader.Announce(OutputLabel.Text);
+            });
         }
 
         private void OnStartServerClicked(object sender, EventArgs e)

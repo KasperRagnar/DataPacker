@@ -6,7 +6,7 @@ namespace BusinessLogic
     {
         void StartAdbApplicationAsBackgroundProcess();
 
-        void WriteInput(string input);
+        string WriteInput(string input);
 
         void AttachHandlerToProcessOutputEvents(DataReceivedEventHandler handler);
 

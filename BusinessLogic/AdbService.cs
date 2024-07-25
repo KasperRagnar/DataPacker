@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.VisualBasic;
+using System.Diagnostics;
+using System.Management.Automation;
 using System.Text;
 
 namespace BusinessLogic
@@ -51,9 +53,25 @@ namespace BusinessLogic
             processHasStarted = true;
         }
 
-        public void WriteInput(string input)
+        //public void WriteInput(string input)
+        //{
+        //    process.StandardInput.WriteLine($"{input}");
+        //}
+
+        public string WriteInput(string input)
         {
-            process.StandardInput.WriteLine($"{input}");
+            try
+            {
+                List<PSObject> psObjects = PowerShell.Create().AddCommand($"echo").AddArgument(input).Invoke().ToList();
+                PSObject echoOutputObject = psObjects.First();
+                return echoOutputObject.BaseObject.ToString()!;
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return "test";
         }
 
         public void AttachHandlerToProcessOutputEvents(DataReceivedEventHandler handler)
