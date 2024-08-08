@@ -1,5 +1,5 @@
 ﻿using BusinessLogic;
-using System.Diagnostics;
+using BusinessLogic.Models;
 
 namespace CrossPlatformApp
 {
@@ -17,7 +17,8 @@ namespace CrossPlatformApp
 
         private void OnWriteInputClicked(object sender, EventArgs e)
         {
-            string finalOutput = _adbService.WriteInput("hello world");
+            PowershellCommand newCommand = new PowershellCommand("echo", new List<string>() { "hello world" });
+            string finalOutput = _adbService.WriteInput(newCommand);
 
             MainThread.BeginInvokeOnMainThread(() =>
             {

@@ -1,4 +1,6 @@
-﻿using System.Management.Automation;
+﻿using BusinessLogic.Extensions;
+using BusinessLogic.Models;
+using System.Management.Automation;
 
 namespace BusinessLogic
 {
@@ -7,11 +9,11 @@ namespace BusinessLogic
     {
         string adbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-tools");
 
-        public string WriteInput(string input)
+        public string WriteInput(PowershellCommand command)
         {
             try
             {
-                List<PSObject> psObjects = PowerShell.Create().AddCommand($"echo").AddArgument(input).Invoke().ToList();
+                List<PSObject> psObjects = PowerShell.Create().BuildPowershellCommand(command).Invoke().ToList();
                 PSObject echoOutputObject = psObjects.First();
                 return echoOutputObject.BaseObject.ToString()!;
             }
@@ -31,7 +33,7 @@ namespace BusinessLogic
         {
             if (disposing)
             {
-                PowerShell.Create().AddCommand($"adb.exe").AddArgument("kill-server").Invoke();
+                // dispose logic here
             }
         }
     }

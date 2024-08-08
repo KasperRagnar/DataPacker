@@ -1,10 +1,10 @@
-﻿using System.Diagnostics;
+﻿using BusinessLogic.Models;
 
 namespace BusinessLogic
 {
     public interface IAdbService
     {
 
-        string WriteInput(string input);
+        string WriteInput(PowershellCommand command);
     }
 }
