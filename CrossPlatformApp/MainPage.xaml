@@ -25,32 +25,11 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
             <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
-
-            <Button
-                x:Name="ConnectBtnTest"
-                Text="Connect to CMD" 
-                Clicked="OnConnectBtnClicked"
-                HorizontalOptions="Fill" />
-            <Button
                 x:Name="HelloWorldBtn"
                 Text="Click me to write input" 
                 Clicked="OnWriteInputClicked"
                 HorizontalOptions="Fill" />
-            <Button
-                x:Name="AdbStartServerBtn"
-                Text="Click me to start adb server" 
-                Clicked="OnStartServerClicked"
-                HorizontalOptions="Fill" />
-            <Button
-                x:Name="AdbKillServerBtn"
-                Text="Click me to kill adb server" 
-                Clicked="OnKillServerClicked"
-                HorizontalOptions="Fill" />
+
             <Frame 
                 BorderColor="Gray"
                 CornerRadius="10">

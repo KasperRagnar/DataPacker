@@ -21,7 +21,6 @@ namespace CrossPlatformApp
 
         protected override void OnStart()
         {
-            _adbService.StartAdbApplicationAsBackgroundProcess();
         }
     }
 }
