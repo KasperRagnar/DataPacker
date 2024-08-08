@@ -36,12 +36,7 @@
                 <Label 
                     x:Name="OutputLabel" />
             </Frame>
-            <Frame 
-                BorderColor="Gray"
-                CornerRadius="10">
-                <Label 
-                    x:Name="ErrorLabel" />
-            </Frame>
+            
         </VerticalStackLayout>
     </ScrollView>
 
